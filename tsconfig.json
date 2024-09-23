@@ -3,8 +3,15 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"],
+      "types/*": ["types/*"],
+      "utils/*": ["utils/*"],
+      "assets/*": ["assets/*"],
+      "contexts/*": ["contexts/*"]
     },
+    "baseUrl": "./",
     "jsx": "react-jsx"
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

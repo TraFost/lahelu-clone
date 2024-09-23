@@ -1,37 +1,69 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
+import { Tabs } from 'expo-router';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { ProfileDrawer, TabBarIcon, LoginModal } from '@/components';
+
+import { screens } from '@/constants/screens';
+import { useToggle } from '@/hooks';
+import { EventArgType } from '@/types/event';
+
+const defaultTabOptions = (icon: { regular: string; focused: string }) => {
+  return {
+    tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+      <TabBarIcon name={(focused ? icon.focused : icon.regular) as any} color={color} />
+    ),
+    title: '',
+  };
+};
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const [profileDrawerVisible, toggleProfileDrawerVisible] = useToggle(false);
+  const [loginModalVisible, toggleLoginModalVisible] = useToggle(false);
+
+  const handleTabPress = (screenName: string) => (e: EventArgType) => {
+    const handler: Record<string, () => void> = {
+      profile: toggleProfileDrawerVisible,
+      post: toggleLoginModalVisible,
+    };
+
+    e.preventDefault();
+    handler[screenName]?.();
+  };
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: '#64A3EC',
+          tabBarInactiveTintColor: 'white',
+          tabBarStyle: {
+            backgroundColor: '#1A1A1A',
+            borderTopColor: 'black',
+            borderTopWidth: 1,
+            paddingBottom: 10,
+          },
+          headerShown: false,
+        }}>
+        {screens.map(screen => (
+          <Tabs.Screen
+            key={screen.name}
+            name={screen.name}
+            options={
+              {
+                ...defaultTabOptions(screen.icon),
+                ...screen.options,
+              } as any
+            }
+            listeners={{
+              tabPress: handleTabPress(screen.name),
+            }}
+          />
+        ))}
+      </Tabs>
+
+      <ProfileDrawer open={profileDrawerVisible} onClose={toggleProfileDrawerVisible} />
+
+      <LoginModal visible={loginModalVisible} onClose={toggleLoginModalVisible} />
+    </>
   );
 }

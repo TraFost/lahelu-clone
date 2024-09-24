@@ -75,11 +75,10 @@ const styles = StyleSheet.create({
   },
 
   sideDrawer: {
-    transform: [{ translateY: 70 }],
+    paddingTop: 50,
     zIndex: 1000,
     width: '100%',
     height: '100%',
-    alignItems: 'flex-start',
     flexDirection: 'column',
   },
 
@@ -101,15 +100,4 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignSelf: 'center',
   },
-
-  post: {
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // width: '100%',
-    // paddingHorizontal: 30,
-    // flex: 1,
-    // paddingHorizontal: 25,
-  },
-
-  postHeader: { gap: 8, paddingHorizontal: 16 },
 });

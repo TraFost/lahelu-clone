@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
 import { Icons, Button, Text, Container } from '@/components/common';
 import NavigationDrawer from '@/components/drawer/navigation';
@@ -7,6 +7,8 @@ import NavigationDrawer from '@/components/drawer/navigation';
 import { useToggle } from '@/hooks';
 import { postCategories } from '@/constants/screens';
 import { useActive } from '@/contexts/activeContext';
+
+const height = Dimensions.get('window').height;
 
 export default function Header() {
   const { active, changeActive } = useActive();
@@ -55,7 +57,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    height: 145,
+    height: height * 0.15,
     backgroundColor: '#1A1A1A',
     alignItems: 'center',
   },

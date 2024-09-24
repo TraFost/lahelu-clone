@@ -33,7 +33,7 @@ export default function Posts() {
       {...posts}
       onScrollBeginDrag={setScrolling}
       onScrollEndDrag={setScrolling}
-      ListHeaderComponent={Promotion}
+      ListHeaderComponent={active === 'Home' ? <Promotion /> : null}
       renderItem={props => renderItem({ ...props, setUpdated, isScrolling })}
       ItemSeparatorComponent={ItemSeparatorComponent}
     />

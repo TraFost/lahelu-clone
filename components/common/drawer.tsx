@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width,
     flex: 1,
-    height: height * (2 / 3),
+    height: height * 0.7,
     backgroundColor: '#181818',
     zIndex: 999,
   },

@@ -40,7 +40,7 @@ export default function TabLayout() {
             backgroundColor: '#1A1A1A',
             borderTopColor: 'black',
             borderTopWidth: 1,
-            paddingBottom: 10,
+            padding: 5,
           },
           headerShown: false,
         }}>

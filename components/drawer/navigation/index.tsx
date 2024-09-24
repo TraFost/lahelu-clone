@@ -15,7 +15,7 @@ interface Props {
 export default function NavigationDrawer({ open, onClose }: Props) {
   return (
     <Drawer direction="left" visible={open} onClose={onClose} closeText="Pilihan">
-      <ScrollContainer>
+      <ScrollContainer style={{ flex: 1 }}>
         <Container gap={20} type="sideDrawer">
           <LoginCard />
           <Categories />
